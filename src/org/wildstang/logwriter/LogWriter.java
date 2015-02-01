@@ -60,6 +60,7 @@ public class LogWriter implements Runnable
 	{
 		FileOutputStream fileOut = new FileOutputStream("save.data");
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(maps);
 		out.close();
 		fileOut.close();
 	}
