@@ -21,13 +21,6 @@ public class LogWriter implements Runnable
 
 	public LogWriter()
 	{
-		Thread t = new Thread();
-		t.start();
-	}
-	
-	@Override
-	public void run()
-	{
 		try
 		{
 			for(int i = 0; true; i++)
@@ -41,7 +34,8 @@ public class LogWriter implements Runnable
 			    mapInputStream.close();
 			    if(i % 10 == 0)
 			    {
-			    	write();
+					Thread t = new Thread();
+					t.start();
 			    }
 			}
 		}
@@ -53,15 +47,24 @@ public class LogWriter implements Runnable
 		{
 			e.printStackTrace();
 		}
-		
 	}
 	
-	public void write() throws IOException
+	@Override
+	public void run()
 	{
-		FileOutputStream fileOut = new FileOutputStream("save.data");
-		ObjectOutputStream out = new ObjectOutputStream(fileOut);
-		out.writeObject(maps);
-		out.close();
-		fileOut.close();
+		try
+		{
+			FileOutputStream fileOut = new FileOutputStream("save.data");
+			ObjectOutputStream out;
+			out = new ObjectOutputStream(fileOut);
+			out.writeObject(maps);
+			out.close();
+			fileOut.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
+
 }
