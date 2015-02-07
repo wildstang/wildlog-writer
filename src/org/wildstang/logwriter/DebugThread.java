@@ -18,7 +18,8 @@ public class DebugThread extends Thread
 		try
 		{
 			List<Map<String, Object>> maps = new ArrayList<>();
-			Socket debugSocket = new Socket("roboRIO-111.local", 1112);
+			Socket debugSocket = new Socket("192.168.7.1", 1112);
+			//Socket debugSocket = new Socket("roboRIO-111.local", 1112);
 			InputStream yourInputStream;
 			ObjectInputStream  mapInputStream;
 			for(int i = 0; true; i++)
