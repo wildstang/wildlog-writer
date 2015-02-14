@@ -9,7 +9,7 @@ public class LogWriter
 		Thread log = new LogThread();
 		log.start();
 		Thread debug = new DebugThread();
-		//debug.start();
+		debug.start();
 	}
 
 }
