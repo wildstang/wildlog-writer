@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +29,10 @@ public class LogThread extends Thread
 			InputStream yourInputStream;
 			ObjectInputStream  mapInputStream;
 			System.out.println("Starting loop...");
-			FileOutputStream fileOut = new FileOutputStream("log.data");
+			Date date = new Date(System.currentTimeMillis());
+			DateFormat format = new SimpleDateFormat("HH-mm-ss");
+			String time = format.format(date);
+			FileOutputStream fileOut = new FileOutputStream(time + "-log.data");
 			ObjectOutputStream out;
 			out = new ObjectOutputStream(fileOut);
 			yourInputStream = null;

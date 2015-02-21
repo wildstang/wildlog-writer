@@ -7,9 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DebugThread extends Thread
@@ -23,12 +24,15 @@ public class DebugThread extends Thread
 		try
 		{
 			Map<String, Object> map = new HashMap<String, Object>();
-			ServerSocket logSocket = new ServerSocket(1111);
+			ServerSocket logSocket = new ServerSocket(1112);
 			Socket socket = logSocket.accept();
 			InputStream yourInputStream;
 			ObjectInputStream  mapInputStream;
 			System.out.println("Starting loop...");
-			FileOutputStream fileOut = new FileOutputStream("debug.data");
+			Date date = new Date(System.currentTimeMillis());
+			DateFormat format = new SimpleDateFormat("HH-mm-ss");
+			String time = format.format(date);
+			FileOutputStream fileOut = new FileOutputStream(time + "-debug.data");
 			ObjectOutputStream out;
 			out = new ObjectOutputStream(fileOut);
 			yourInputStream = null;
