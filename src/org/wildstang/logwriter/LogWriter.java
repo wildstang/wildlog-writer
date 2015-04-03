@@ -8,7 +8,7 @@ public class LogWriter
 	
 	public static void main(String[] args)
 	{
-		File file = new File("log.data");
+		File file = new File("/robot-logs/log.data");
 		if(!file.exists())
 		{
 			try {

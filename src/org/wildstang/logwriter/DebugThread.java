@@ -1,4 +1,4 @@
-package org.wildstang.logwriter;
+	package org.wildstang.logwriter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,44 +20,49 @@ public class DebugThread extends Thread
 	@Override
 	public void run()
 	{
-		System.out.println("DebugThread started!");
-		try
+		while(true)
 		{
-			Map<String, Object> map = new HashMap<String, Object>();
-			ServerSocket logSocket = new ServerSocket(1112);
-			Socket socket = logSocket.accept();
-			InputStream yourInputStream;
-			ObjectInputStream  mapInputStream;
-			System.out.println("Starting loop...");
-			Date date = new Date(System.currentTimeMillis());
-			DateFormat format = new SimpleDateFormat("HH-mm-ss");
-			String time = format.format(date);
-			FileOutputStream fileOut = new FileOutputStream(time + "-debug.data");
-			ObjectOutputStream out;
-			out = new ObjectOutputStream(fileOut);
-			yourInputStream = null;
-			System.out.println("Waiting for InputStream...");
-			while((yourInputStream = socket.getInputStream()) == null){}
-			System.out.println("Data found!");
-			mapInputStream = new ObjectInputStream(yourInputStream);
-			while(running)
+			System.out.println("DebugThread started!");
+			boolean running = true;
+			try
 			{
-				while((map = (Map) mapInputStream.readObject()) == null){}
-				System.out.println("Writing");
-				out.writeObject(map);
-				out.flush();
+				Map<String, Object> map = new HashMap<String, Object>();
+				ServerSocket logSocket = new ServerSocket(1112);
+				Socket socket = logSocket.accept();
+				InputStream yourInputStream;
+				ObjectInputStream  mapInputStream;
+				System.out.println("Starting loop...");
+				Date date = new Date(System.currentTimeMillis());
+				DateFormat format = new SimpleDateFormat("HH-mm-ss");
+				String time = format.format(date);
+				FileOutputStream fileOut = new FileOutputStream(time + "-debug.data");
+				ObjectOutputStream out;
+				out = new ObjectOutputStream(fileOut);
+				yourInputStream = null;
+				System.out.println("Waiting for InputStream...");
+				while((yourInputStream = socket.getInputStream()) == null){}
+				System.out.println("Data found!");
+				mapInputStream = new ObjectInputStream(yourInputStream);
+				while(running)
+				{
+					while((map = (Map) mapInputStream.readObject()) == null){}
+					//running = (Boolean) map.get("enabled");
+					System.out.println("Writing");
+					out.writeObject(map);
+					out.flush();
+				}
+				out.close();
+				fileOut.close();
+				mapInputStream.close();
 			}
-			out.close();
-			fileOut.close();
-			mapInputStream.close();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 }
