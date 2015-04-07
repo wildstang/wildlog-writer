@@ -1,4 +1,4 @@
-package org.wildstang.logwriter;
+package org.wildstang.wildlog.writer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
