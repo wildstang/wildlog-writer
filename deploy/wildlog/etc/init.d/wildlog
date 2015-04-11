@@ -1,0 +1,33 @@
+PIDFILE=/var/log/lock/wildlog.pid
+WILDLOGD="java -jar /opt/wildlog/logwriter.jar"
+start() {
+        echo -n "Starting : "
+	start-stop-daemon --start --background -m --pidfile $PIDFILE -exec $WILDLOGD 
+        return
+}
+
+stop() {
+        echo -n "Shutting down : "
+	start-stop-daemon --stop --pidfile $PIDFILE $WILDLOGD
+	rm -f $PIDFILE
+        return
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage:  {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit $?
+

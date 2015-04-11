@@ -1,0 +1,10 @@
+Package: wildlog-writer 
+Section: base
+Priority: optional
+Version: 0.0.1-1
+Architecture: beaglebone
+Maintainer: wildstang@wildstang.org
+Source: http://github.com/wildstang111
+Depends: none
+Description: This is the wildlog log writer.
+
