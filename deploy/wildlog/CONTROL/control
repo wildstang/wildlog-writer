@@ -1,10 +1,10 @@
-Package: wildlog-writer 
+Package: wildlog 
 Section: base
 Priority: optional
 Version: 0.0.1-1
-Architecture: beaglebone
+Architecture: armhf
 Maintainer: wildstang@wildstang.org
 Source: http://github.com/wildstang111
-Depends: none
+Depends: java-jdk
 Description: This is the wildlog log writer.
 

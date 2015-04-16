@@ -1,16 +1,20 @@
-PIDFILE=/var/log/lock/wildlog.pid
-WILDLOGD="java -jar /opt/wildlog/logwriter.jar"
+PIDFILE=/var/run/wildlog.pid
+WILDLOGD="/opt/jdk1.8.0_33/bin/java -jar /opt/wildlog/logwriter.jar"
 start() {
-        echo -n "Starting : "
-	start-stop-daemon --start --background -m --pidfile $PIDFILE -exec $WILDLOGD 
-        return
+        echo -n "Starting wildlog "
+	$WILDLOGD &
+	echo $! > $PIDFILE
+
 }
 
 stop() {
         echo -n "Shutting down : "
-	start-stop-daemon --stop --pidfile $PIDFILE $WILDLOGD
+	if [ -f $PIDFILE ]; then
+		pkill -F $PIDFILE
+	else
+		pkill java
+	fi
 	rm -f $PIDFILE
-        return
 }
 
 case "$1" in

@@ -1,0 +1,10 @@
+Package: java-jdk 
+Section: base
+Priority: optional
+Version: 1.8.0-33-1
+Architecture: armhf
+Maintainer: oracle
+Source: oracle
+Depends:
+Description: java.
+

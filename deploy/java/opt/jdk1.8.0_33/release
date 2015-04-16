@@ -1,0 +1,7 @@
+JAVA_VERSION="1.8.0_33"
+OS_NAME="Linux"
+OS_VERSION="2.6"
+OS_ARCH="arm"
+SUN_ARCH_ABI="gnueabihf"
+SOURCE=" .:e93dabf88b1c corba:8c1924be18e6 deploy:cc003c0bc526 hotspot:5d8327350644 hotspot/make/closed:efe02d443dca hotspot/src/closed:08979e22a1e7 hotspot/test/closed:0d4d9b30e7f6 install:03f478699761 jaxp:b096c9605bef jaxws:f27572b52bd2 jdk:418f67f60411 jdk/make/closed:a4685e28a594 jdk/src/closed:9586f75ec6ab jdk/test/closed:e305a545de11 langtools:9c52ddf27df0 nashorn:a0f2df829303 pubs:f9ea8199da1d sponsors:0517a4fa0c8b"
+BUILD_TYPE="commercial"
